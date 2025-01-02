@@ -1,4 +1,4 @@
-# Semantic Search Application (Quora-like MVP) using FastAPI, Pinecone, and Sentence Transformers  
+# Semantic Search Application using FastAPI, Pinecone, and Sentence Transformers  
 
 This is a semantic search application (similar to Quora) built using FastAPI, Pinecone, and Sentence Transformers. The application allows users to input text, which is then processed and queried against a Pinecone vector database to find the most relevant matches of questions from quora.
 
