@@ -3,51 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Processed Input</title>
+    <title>Similar Questions - Q&A Search</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background-color: #fafafa;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            color: #282829;
         }
-        .container {
+
+        .navbar {
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+            border-bottom: 1px solid #dee0e1;
+            padding: 8px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
         }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #555;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
+
+        .logo {
+            color: #b92b27;
+            font-size: 24px;
+            font-weight: bold;
             text-decoration: none;
-            color: #007BFF;
-            padding: 10px 20px;
-            border: 1px solid #007BFF;
-            border-radius: 4px;
+            margin-left: 24px;
         }
-        a:hover {
-            background-color: #007BFF;
+
+        .container {
+            max-width: 700px;
+            margin: 80px auto 40px;
+            padding: 24px;
+        }
+
+        .results-box {
+            background-color: #fff;
+            border: 1px solid #dee0e1;
+            border-radius: 3px;
+            padding: 24px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            color: #282829;
+            font-size: 21px;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .result-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #dee0e1;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .match-score {
+            color: #636466;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .question-text {
+            color: #282829;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 24px;
+            text-decoration: none;
             color: #fff;
+            background-color: #b92b27;
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        .back-button:hover {
+            background-color: #a82723;
+        }
+
+        .no-results {
+            color: #636466;
+            font-style: italic;
+            text-align: center;
+            padding: 32px 0;
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="/" class="logo">Q&A Search</a>
+    </div>
     <div class="container">
-        <h1>Processing Result</h1>
-        <p>{{ result|safe }}</p>
-        <a href="/">Go back</a>
+        <div class="results-box">
+            <h1>Similar Questions Found</h1>
+            {% set results = result.split('<br>') %}
+            {% if results|length > 0 and results[0] %}
+                {% for item in results %}
+                    {% set score, text = item.split(': ', 1) %}
+                    <div class="result-item">
+                        <div class="match-score">Similarity: {{ "%.2f"|format(score|float) }}</div>
+                        <div class="question-text">{{ text }}</div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-results">No similar questions found</div>
+            {% endif %}
+            <a href="/" class="back-button">Ask Another Question</a>
+        </div>
     </div>
 </body>
 </html>

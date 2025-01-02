@@ -2,82 +2,143 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Semantic Search</title>
+    <title>Ask a Question - Semantic Search</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background-color: #fafafa;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            color: #282829;
         }
-        .container {
+
+        .navbar {
             background-color: #fff;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 600px;
+            border-bottom: 1px solid #dee0e1;
+            padding: 8px 0;
+            position: fixed;
             width: 100%;
-            box-sizing: border-box;
+            top: 0;
+            z-index: 100;
         }
+
+        .logo {
+            color: #b92b27;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-left: 24px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 100px auto 40px;
+            padding: 24px;
+        }
+
+        .question-box {
+            background-color: #fff;
+            border: 1px solid #dee0e1;
+            border-radius: 3px;
+            padding: 24px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
         h1 {
-            color: #333;
-            margin-bottom: 20px;
+            color: #282829;
+            font-size: 21px;
+            margin-bottom: 16px;
+            font-weight: 500;
         }
+
         form {
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: #555;
-            font-size: 1.2em;
-        }
-        input[type="text"] {
+
+        textarea {
             width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1em;
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #dee0e1;
+            border-radius: 3px;
+            margin-bottom: 16px;
+            font-size: 15px;
+            resize: vertical;
+            font-family: inherit;
+            box-sizing: border-box;
         }
-        input[type="submit"] {
-            background-color: #007BFF;
+
+        textarea:focus {
+            outline: none;
+            border-color: #2b6dad;
+        }
+
+        button {
+            background-color: #b92b27;
             color: #fff;
             border: none;
-            padding: 15px 30px;
-            border-radius: 4px;
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-size: 14px;
+            font-weight: 500;
             cursor: pointer;
-            font-size: 1em;
+            align-self: flex-end;
         }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+
+        button:hover {
+            background-color: #a82723;
         }
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            input[type="text"], input[type="submit"] {
-                width: 100%;
-                font-size: 0.9em;
-            }
+
+        .suggestions {
+            margin-top: 32px;
+            color: #636466;
+            font-size: 13px;
+        }
+
+        .suggestions h2 {
+            font-size: 15px;
+            color: #282829;
+            margin-bottom: 8px;
+        }
+
+        .tips {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tips li {
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="/" class="logo">Q&A Search</a>
+    </div>
     <div class="container">
-        <h1>Semantic Search</h1>
-        <form action="/process" method="post">
-            <label for="user_input">Let's submit some text</label>
-            <input type="text" id="user_input" name="user_input" required>
-            <input type="submit" value="Send query"/>
-        </form>
+        <div class="question-box">
+            <h1>Ask your question</h1>
+            <form action="/process" method="post">
+                <textarea 
+                    id="user_input" 
+                    name="user_input" 
+                    placeholder="What would you like to know?"
+                    required></textarea>
+                <button type="submit">Search for similarities</button>
+            </form>
+        </div>
+
+        <div class="suggestions">
+            <h2>Tips for getting better answers:</h2>
+            <ul class="tips">
+                <li>• Make sure your question is clear and specific</li>
+                <li>• Keep your question concise</li>
+                <li>• Check if similar questions have been asked before</li>
+                <li>• Provide relevant context when needed</li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
